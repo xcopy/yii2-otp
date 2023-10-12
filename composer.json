@@ -1,0 +1,28 @@
+{
+    "name": "xcopy/yii2-otp",
+    "type": "yii2-extension",
+    "keywords": ["yii2", "user", "otp"],
+    "authors": [
+        {
+            "name": "Kairat Jenishev",
+            "email": "kairat.jenishev@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4",
+        "yiisoft/yii2": "~2.0.45",
+        "yiisoft/yii2-bootstrap5": "~2.0.2",
+        "yiisoft/yii2-queue": "~2.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "xcopy\\otp\\": "src/"
+        }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ]
+}
