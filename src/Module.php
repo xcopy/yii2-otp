@@ -13,6 +13,21 @@ use yii\base\{BootstrapInterface, Module as BaseModule};
  */
 class Module extends BaseModule implements BootstrapInterface
 {
+    /** @var int OTP length */
+    public int $length = 6;
+
+    /** @var string OTP expiry duration */
+    public string $duration = '5 minutes';
+
+    /**
+     * @var int number of seconds that the user can remain in logged-in status
+     * @see \yii\web\User::login()
+     */
+    public int $userLoginDuration = 0;
+
+    /**
+     * @inheritDoc
+     */
     public function init()
     {
         parent::init();

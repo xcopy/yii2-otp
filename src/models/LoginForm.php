@@ -2,6 +2,7 @@
 
 namespace xcopy\otp\models;
 
+use xcopy\otp\Module;
 use xcopy\otp\jobs\SendOtpJob;
 use yii\base\Model;
 use yii\db\{ActiveQueryInterface, Expression};
@@ -122,12 +123,14 @@ class LoginForm extends Model
      */
     public function login(): bool
     {
+        $module = Module::getInstance();
+
         if ($this->validate()) {
             $user = $this->user;
 
             $login = Yii::$app->user->login(
                 $user,
-                $this->rememberMe ? env('USER_LOGIN_DURATION', 3600 * 24) : 0
+                $this->rememberMe ? $module->userLoginDuration : 0
             );
 
             $login and $this->resetOtp($user);
@@ -145,13 +148,14 @@ class LoginForm extends Model
      */
     public function sendOtp(): ?string
     {
-        $length = env('OTP_LENGTH', 6);
-        $otp = str_pad(mt_rand(0, str_repeat('9', $length)), $length, '0', STR_PAD_LEFT);
+        $module = Module::getInstance();
+
+        $otp = str_pad(mt_rand(0, str_repeat('9', $module->length)), $module->length, '0', STR_PAD_LEFT);
 
         $user = $this->user;
 
         $user->otp = Yii::$app->security->generatePasswordHash($otp);
-        $user->otp_expiry = date('Y-m-d H:i:s', strtotime(env('OTP_DURATION', '5 minutes')));
+        $user->otp_expiry = date('Y-m-d H:i:s', strtotime($module->duration));
         $user->otp_token = Yii::$app->security->generateRandomString();
 
         if ($user->save()) {
