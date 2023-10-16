@@ -64,7 +64,9 @@ JS
                             ->textInput([
                                 'autofocus' => $isRequestScenario,
                                 'readonly' => $isLoginScenario,
-                                'class' => $isLoginScenario ? 'form-control-plaintext' : 'form-control'
+                                'class' => $isLoginScenario ? 'form-control-plaintext' : 'form-control',
+                                'inputmode' => 'numeric',
+                                'type' => 'email',
                             ])
                             ->label($isRequestScenario);
 
