@@ -27,7 +27,7 @@ class SendOtpJob extends BaseObject implements JobInterface
     {
         return Yii::$app->mailer
             ->compose('otp', ['otp' => $this->otp])
-            ->setSubject('OTP Verification - ' . Yii::$app->name)
+            ->setSubject('Your verification code')
             ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
             ->setTo($this->email)
             ->send();

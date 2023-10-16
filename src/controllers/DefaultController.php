@@ -55,7 +55,7 @@ class DefaultController extends Controller
         $model->scenario = LoginForm::SCENARIO_LOGIN;
 
         if (time() > strtotime($user->otp_expiry)) {
-            Yii::$app->session->setFlash('warning', Yii::t('xcopy/otp', 'OTP has expired.'));
+            Yii::$app->session->setFlash('warning', Yii::t('xcopy/otp', 'Verification code has expired.'));
 
             $model->resetOtp($user);
 

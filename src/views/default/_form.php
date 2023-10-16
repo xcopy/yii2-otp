@@ -52,8 +52,8 @@ JS
                         <?php echo Html::tag(
                             'div',
                             $isRequestScenario
-                                ? Yii::t('xcopy/otp', 'A One Time Password (OTP) will be sent to the email address you provide.')
-                                : Yii::t('xcopy/otp', 'Enter the {0}-digit One Time Password (OTP) that was sent. It expires in {1}.', [
+                                ? Yii::t('xcopy/otp', 'A verification code will be sent to the email address you provide.')
+                                : Yii::t('xcopy/otp', 'Enter the {0}-digit verification code that was sent.<br>It will expire in {1}.', [
                                     $module->length,
                                     Html::tag('strong', '', ['id' => 'timer'])
                                 ]),
@@ -73,7 +73,7 @@ JS
                                 ->textInput([
                                     'autofocus' => true,
                                     'inputmode' => 'numeric',
-                                    'placeholder' => Yii::t('xcopy/otp', 'Enter OTP'),
+                                    'placeholder' => Yii::t('xcopy/otp', 'Verification code'),
                                 ])
                                 ->label(false);
 
@@ -85,7 +85,7 @@ JS
                         <div class="d-grid">
                             <?= Html::button(
                                 $isRequestScenario
-                                    ? Yii::t('xcopy/otp', 'Send OTP')
+                                    ? Yii::t('xcopy/otp', 'Send verification code')
                                     : Yii::t('xcopy/otp', 'Login'),
                                 [
                                     'type' => 'submit',

@@ -74,7 +74,7 @@ class LoginForm extends Model
     {
         return [
             'email' => Yii::t('app', 'E-mail'),
-            'otp' => Yii::t('app', 'OTP'),
+            'otp' => Yii::t('app', 'Verification code'),
             'rememberMe' => Yii::t('app', 'Remember me'),
         ];
     }
@@ -111,7 +111,7 @@ class LoginForm extends Model
             $user = $this->user;
 
             if (!$user || !Yii::$app->security->validatePassword($this->otp, $user->otp)) {
-                $this->addError($attribute, Yii::t('app', 'Incorrect OTP.'));
+                $this->addError($attribute, Yii::t('app', 'Incorrect verification code.'));
             }
         }
     }
