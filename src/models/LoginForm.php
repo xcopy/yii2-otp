@@ -59,7 +59,7 @@ class LoginForm extends Model
             ],
             /** @see validateOtp() */
             [
-                'email',
+                'otp',
                 'validateOtp',
                 'on' => self::SCENARIO_LOGIN
             ],
@@ -153,6 +153,10 @@ class LoginForm extends Model
         $otp = str_pad(mt_rand(0, str_repeat('9', $module->length)), $module->length, '0', STR_PAD_LEFT);
 
         $user = $this->user;
+
+        if ($user->otp && time() < strtotime($user->otp_expiry)) {
+            return $user->otp_token;
+        }
 
         $user->otp = Yii::$app->security->generatePasswordHash($otp);
         $user->otp_expiry = date('Y-m-d H:i:s', strtotime($module->duration));

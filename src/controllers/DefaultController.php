@@ -68,6 +68,6 @@ class DefaultController extends Controller
             return $this->redirect([Yii::$app->homeUrl]);
         }
 
-        return $this->render('login', compact('model'));
+        return $this->render('login', compact('model', 'user'));
     }
 }

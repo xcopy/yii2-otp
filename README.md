@@ -47,6 +47,10 @@ and re-generate identity object model (commonly `app\models\User`).
         // 'userLoginDuration' => 3600 * 24 // optional, defaults to "0" (applicable only if \yii\web\User::$enableAutoLogin is set to `true`)
     ],
 ],
+'params' => [
+    'senderEmail' => 'Example',
+    'senderName' => 'noreply@example.com',
+],
 ```
 
 ### Email template
