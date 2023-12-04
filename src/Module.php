@@ -3,7 +3,8 @@
 namespace xcopy\otp;
 
 use Yii;
-use yii\base\{BootstrapInterface, Module as BaseModule};
+use yii\base\{Application, BootstrapInterface, Module as BaseModule};
+use yii\web\{Application as WebApplication, User};
 
 /**
  * Class Module
@@ -21,7 +22,7 @@ class Module extends BaseModule implements BootstrapInterface
 
     /**
      * @var int number of seconds that the user can remain in logged-in status
-     * @see \yii\web\User::login()
+     * @see User::login()
      */
     public int $userLoginDuration = 0;
 
@@ -44,6 +45,7 @@ class Module extends BaseModule implements BootstrapInterface
      */
     public function bootstrap($app)
     {
+        /** @var WebApplication $app */
         $app->getUrlManager()->addRules([
             [
                 'class' => 'yii\web\UrlRule',
@@ -52,10 +54,11 @@ class Module extends BaseModule implements BootstrapInterface
             ],
         ], false);
 
-        $app->on('afterRequest', function () use ($app) {
-            if ($app->user->isGuest) {
+        $app->on(Application::EVENT_AFTER_REQUEST, function () use ($app) {
+            if ($app->user->getIsGuest()) {
                 if ($app->requestedRoute == trim($app->user->loginUrl, '/')) {
                     $app->response->redirect([$this->id]);
+                    $app->end();
                 }
             }
         });
