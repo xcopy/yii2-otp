@@ -73,9 +73,9 @@ class LoginForm extends Model
     public function attributeLabels(): array
     {
         return [
-            'email' => Yii::t('app', 'E-mail'),
-            'otp' => Yii::t('app', 'Verification code'),
-            'rememberMe' => Yii::t('app', 'Remember me'),
+            'email' => Yii::t('xcopy/otp', 'E-mail'),
+            'otp' => Yii::t('xcopy/otp', 'Verification code'),
+            'rememberMe' => Yii::t('xcopy/otp', 'Remember me'),
         ];
     }
 
@@ -90,7 +90,7 @@ class LoginForm extends Model
     {
         if (!$this->hasErrors()) {
             if (!$user = $this->user) {
-                $this->addError($attribute, Yii::t('app', 'Incorrect email.'));
+                $this->addError($attribute, Yii::t('xcopy/otp', 'Incorrect email.'));
             } elseif (method_exists($user, 'validateUser')) {
                 $user->validateUser();
                 $user->hasErrors() and $this->addError($attribute, current($user->firstErrors));
@@ -111,7 +111,7 @@ class LoginForm extends Model
             $user = $this->user;
 
             if (!$user || !Yii::$app->security->validatePassword($this->otp, $user->otp)) {
-                $this->addError($attribute, Yii::t('app', 'Incorrect verification code.'));
+                $this->addError($attribute, Yii::t('xcopy/otp', 'Incorrect verification code.'));
             }
         }
     }

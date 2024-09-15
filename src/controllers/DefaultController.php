@@ -8,7 +8,7 @@ use yii\web\{BadRequestHttpException, Controller, IdentityInterface, Response};
 use Yii;
 
 /**
- * Class OtpController
+ * Class DefaultController
  *
  * @package xcopy\otp\controllers
  * @author Kairat Jenishev <kairat.jenishev@gmail.com>
@@ -18,7 +18,7 @@ class DefaultController extends Controller
     /**
      * @return Response|string
      */
-    public function actionIndex(): Response|string
+    public function actionIndex()
     {
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
@@ -40,7 +40,7 @@ class DefaultController extends Controller
      *
      * @return Response|string
      */
-    public function actionLogin(string $token): Response|string
+    public function actionLogin(string $token)
     {
         /** @var ActiveQueryInterface $query */
         $query = call_user_func([Yii::$app->user->identityClass, 'find']);
